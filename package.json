@@ -1,0 +1,146 @@
+{
+  "name": "app",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.ts",
+  "sideEffects": false,
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "npm run test -- --coverage",
+    "test:watch": "npm run test -- --watchAll",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.ts",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "lint:fix": "npm run lint:eslint:fix && npm run lint:prettier:fix",
+    "lint:eslint": "eslint --ignore-path .gitignore .",
+    "lint:eslint:fix": "npm run lint:eslint -- --fix",
+    "lint:prettier": "prettier --ignore-path .gitignore --check .",
+    "lint:prettier:fix": "npm run lint:prettier -- --write",
+    "start": "webpack serve",
+    "prepare": "husky install"
+  },
+  "author": "Aleksi Gold <aleksi@kulta.us>",
+  "license": "MIT",
+  "prettier": {
+    "singleQuote": true
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom",
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:react/recommended",
+      "plugin:react-hooks/recommended",
+      "plugin:jsx-a11y/recommended",
+      "plugin:jest/recommended",
+      "plugin:import/recommended",
+      "plugin:import/typescript",
+      "plugin:promise/recommended",
+      "plugin:unicorn/recommended",
+      "prettier"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 13,
+      "sourceType": "module"
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "rules": {
+      "react/react-in-jsx-scope": "off",
+      "unicorn/prevent-abbreviations": [
+        "error",
+        {
+          "replacements": {
+            "props": false
+          }
+        }
+      ],
+      "import/order": [
+        "error",
+        {
+          "newlines-between": "always",
+          "groups": [
+            [
+              "builtin",
+              "external"
+            ],
+            "internal"
+          ],
+          "alphabetize": {
+            "order": "asc",
+            "caseInsensitive": true
+          }
+        }
+      ]
+    }
+  },
+  "lint-staged": {
+    "*": "npm run lint"
+  },
+  "dependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",
+    "@reduxjs/toolkit": "^1.7.1",
+    "@testing-library/react": "^12.1.2",
+    "@types/enzyme": "^3.10.11",
+    "@types/jest": "^27.4.0",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-redux": "^7.1.22",
+    "@types/styled-components": "^5.1.20",
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "@typescript-eslint/parser": "^5.9.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.6.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^25.3.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-unicorn": "^40.0.0",
+    "fork-ts-checker-webpack-plugin": "^6.5.0",
+    "html-webpack-plugin": "^5.5.0",
+    "husky": "^7.0.4",
+    "jest": "^27.4.7",
+    "lint-staged": "^12.1.7",
+    "prettier": "^2.5.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "react-refresh": "^0.11.0",
+    "react-refresh-typescript": "^2.0.3",
+    "react-router-dom": "^6.2.1",
+    "serve": "^13.0.2",
+    "styled-components": "^5.3.3",
+    "thread-loader": "^3.0.4",
+    "ts-jest": "^27.1.2",
+    "ts-loader": "^9.2.6",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4",
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.3"
+  }
+}
