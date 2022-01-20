@@ -1,18 +1,18 @@
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'); // eslint-disable-line unicorn/prefer-module, @typescript-eslint/no-var-requires
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin'); // eslint-disable-line unicorn/prefer-module, @typescript-eslint/no-var-requires
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line unicorn/prefer-module, @typescript-eslint/no-var-requires
-const path = require('path'); // eslint-disable-line unicorn/prefer-node-protocol, unicorn/prefer-module, @typescript-eslint/no-var-requires
-const ReactRefreshTypeScript = require('react-refresh-typescript'); // eslint-disable-line unicorn/prefer-module, @typescript-eslint/no-var-requires
+/* eslint-disable unicorn/prefer-module, @typescript-eslint/no-var-requires */
+
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
-// eslint-disable-next-line unicorn/prefer-module
 module.exports = {
   mode: isDevelopment ? 'development' : 'production',
   entry: './src/index.tsx',
   output: {
     filename: '[contenthash].[name].js',
-    path: path.resolve(__dirname, 'dist'), // eslint-disable-line unicorn/prefer-module
+    path: path.resolve(__dirname, 'dist'),
     clean: !isDevelopment,
   },
   optimization: {
@@ -38,11 +38,10 @@ module.exports = {
             loader: 'ts-loader',
             options: {
               happyPackMode: true,
-              getCustomTransformers: () => ({
-                before: [isDevelopment && ReactRefreshTypeScript()].filter(
-                  Boolean
-                ),
-              }),
+              getCustomTransformers: path.join(
+                __dirname,
+                './webpack.transformer.ts'
+              ),
             },
           },
         ],
